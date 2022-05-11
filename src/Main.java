@@ -16,20 +16,17 @@ public class Main {
 		
 		System.out.print("Please enter your account number: ");
 		String acctNum = sc.next();
-		// how to access just one account's info? an if statement?
 		
 		boolean found = false;
 		int indexOfAcct = 0;
 		
 		for(int i = 0; i < accounts.length; i++) {
-			// this accesses the account as a whole, not just the acct number portion
-			// what I put isn't correct, but is essentially the idea I'm trying to get at
 			if (acctNum.equals(accounts[i].accountNumber)) {
 				found = true;
 				indexOfAcct = i;
 			}
 		}
-			// limit to 4? separate boolean or same?
+		
 			if (found == true) {
 				System.out.print("Please enter your PIN: ");
 				int PIN = sc.nextInt();
@@ -45,41 +42,107 @@ public class Main {
 			
 		while (option != 5) {
 		
-		System.out.println("1) Balance Inquiry");
+		System.out.println("\n1) Balance Inquiry");
 		System.out.println("2) Withdrawal");
 		System.out.println("3) Deposit");
 		System.out.println("4) Fast Cash");
 		System.out.println("5) Exit");
 		
-		System.out.print("Please pick an option: ");
+		System.out.print("\nPlease pick an option: ");
 		option = sc.nextInt();
 		System.out.println();
 		
 			switch(option) {
 			
-			// would have to have scope of i continue to here in order to access correct account?
 			case 1:
 				
 				accounts[indexOfAcct].checkBalance();
+				
+				System.out.println("\nDo you wish to make another transaction?");
+				System.out.println("1) Yes");
+				System.out.println("2) No");
+				
+				option = sc.nextInt();
+				
+				if (option == 2) {
+					option = 5;
+				}
 				break;
+				
 			case 2:
 				
 				System.out.print("Withdrawal: ");
 				double withdrawal = sc.nextDouble();
 				
 				accounts[indexOfAcct].withdraw(withdrawal, sc);
+				
+				System.out.println("\nDo you wish to make another transaction?");
+				System.out.println("1) Yes");
+				System.out.println("2) No");
+				
+				option = sc.nextInt();
+				
+				if (option == 2) {
+					option = 5;
+				}
 				break;
+				
 			case 3:
-				// need cash or check ope
-				System.out.println("1) Checking");
-				System.out.println("2) Savings");
+				
+				System.out.print("Deposit: ");
+				double deposit = sc.nextDouble();
+				
+				accounts[indexOfAcct].deposit(deposit, sc);
+				
+				System.out.println("\nDo you wish to make another transaction?");
+				System.out.println("1) Yes");
+				System.out.println("2) No");
+				
+				option = sc.nextInt();
+				
+				if (option == 2) {
+					option = 5;
+				}
+				break;
+				
+			case 4:
+				
+				System.out.println("1) $20");
+				System.out.println("2) $40");
+				System.out.println("3) $100");
 				
 				option = sc.nextInt();
 				
 				if (option == 1) {
-					System.out.print("Deposit: ");
-					break;
+					accounts[indexOfAcct].fastCash(20, sc);
 				}
+				if (option == 2) {
+					accounts[indexOfAcct].fastCash(40, sc);
+				}
+				if (option == 3) {
+					accounts[indexOfAcct].fastCash(100, sc);
+				}
+				
+				System.out.println("\nDo you wish to make another transaction?");
+				System.out.println("1) Yes");
+				System.out.println("2) No");
+				
+				option = sc.nextInt();
+				
+				if (option == 2) {
+					option = 5;
+				}
+				break;
+				
+			case 5:
+				
+				System.out.println("Thank you for your patronage.");
+				break;
+				
+			default:
+				
+				System.out.println("Please enter a valid option.");
+				break;
 			}
 		}
 		}

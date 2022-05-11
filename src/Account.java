@@ -21,7 +21,7 @@ public class Account {
 	
 	public void withdraw(double withdrawal, Scanner sc) {
 		
-		System.out.println("1) Checking");
+		System.out.println("\n1) Checking");
 		System.out.println("2) Savings");
 		
 		int option = sc.nextInt();
@@ -29,6 +29,7 @@ public class Account {
 		if (option == 1) {
 			if (this.checkingBalance >= withdrawal) {
 				this.checkingBalance -= withdrawal;
+				checkBalance();
 				} else {
 					System.out.println("ERROR: Withdrawal exceeds balance.");
 				}
@@ -36,6 +37,7 @@ public class Account {
 		if (option == 2) {
 			if (this.savingsBalance >= withdrawal) {
 				this.savingsBalance -= withdrawal;
+				checkBalance();
 				} else {
 					System.out.println("ERROR: Withdrawal exceeds balance.");
 				}
@@ -45,15 +47,26 @@ public class Account {
 		}
 	}
 	
-	public void depositCashChecking(double deposit) {
-		this.checkingBalance += deposit;
+	public void deposit(double deposit, Scanner sc) {
+			
+			System.out.println("\n1) Checking");
+			System.out.println("2) Savings");
+			
+			int option = sc.nextInt();
+		
+			if (option == 1) {
+					this.checkingBalance += deposit;
+					checkBalance();
+			}
+			if (option == 2) {
+					this.savingsBalance += deposit;
+					checkBalance();
+			}
+			if (option != 1 && option != 2) {
+				System.out.println("ERROR: Please select a valid option.");
+			}
 	}
-	
-	public void depositCheckChecking(double deposit) {
-		this.checkingBalance += deposit;
-	}
-	
-	
+		
 	public void checkBalance() {
 		System.out.println("Balance Inquiry");
 		System.out.println(returnAcctNumber());
@@ -64,6 +77,15 @@ public class Account {
 	
 	public String returnAcctNumber() {
 		return ("*".repeat(12) + this.accountNumber.substring(12));
+	}
+	
+	public void fastCash(double withdrawal, Scanner sc) {
+			if (this.checkingBalance >= withdrawal) {
+				this.checkingBalance -= withdrawal;
+				checkBalance();
+				} else {
+					System.out.println("ERROR: Withdrawal exceeds balance.");
+				}
 	}
 }
 
