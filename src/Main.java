@@ -58,15 +58,7 @@ public class Main {
 				
 				accounts[indexOfAcct].checkBalance();
 				
-				System.out.println("\nDo you wish to make another transaction?");
-				System.out.println("1) Yes");
-				System.out.println("2) No");
-				
-				option = sc.nextInt();
-				
-				if (option == 2) {
-					option = 5;
-				}
+				option = shouldUserContinue(sc);
 				break;
 				
 			case 2:
@@ -76,15 +68,7 @@ public class Main {
 				
 				accounts[indexOfAcct].withdraw(withdrawal, sc);
 				
-				System.out.println("\nDo you wish to make another transaction?");
-				System.out.println("1) Yes");
-				System.out.println("2) No");
-				
-				option = sc.nextInt();
-				
-				if (option == 2) {
-					option = 5;
-				}
+				option = shouldUserContinue(sc);
 				break;
 				
 			case 3:
@@ -94,15 +78,7 @@ public class Main {
 				
 				accounts[indexOfAcct].deposit(deposit, sc);
 				
-				System.out.println("\nDo you wish to make another transaction?");
-				System.out.println("1) Yes");
-				System.out.println("2) No");
-				
-				option = sc.nextInt();
-				
-				if (option == 2) {
-					option = 5;
-				}
+				option = shouldUserContinue(sc);
 				break;
 				
 			case 4:
@@ -123,15 +99,8 @@ public class Main {
 					accounts[indexOfAcct].fastCash(100, sc);
 				}
 				
-				System.out.println("\nDo you wish to make another transaction?");
-				System.out.println("1) Yes");
-				System.out.println("2) No");
+				option = shouldUserContinue(sc);
 				
-				option = sc.nextInt();
-				
-				if (option == 2) {
-					option = 5;
-				}
 				break;
 				
 			case 5:
@@ -155,6 +124,23 @@ public class Main {
 			Account newAccount = new Account(array[0], array [1], array [2], Integer.parseInt(array[3]), Double.parseDouble(array[4]), Double.parseDouble(array[5]));
 			accounts[counter] = newAccount;
 			counter++;
+		}
+	}
+	
+	public static int shouldUserContinue (Scanner sc) {
+		
+		System.out.println("\nDo you wish to make another transaction?");
+		System.out.println("1) Yes");
+		System.out.println("2) No");
+		
+		int option = sc.nextInt();
+		
+		if (option == 1) {
+			return 1;
+		} else if (option == 2) {
+			return 5;
+		} else {
+			return 1;
 		}
 	}
 }
